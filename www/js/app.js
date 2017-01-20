@@ -7,6 +7,11 @@ angular.module('starter', ['ionic'])
   $scope.recognizedText = "";
   $scope.selectedLanguage = "";
   $scope.recordedLanguage = "";
+  $scope.nativeLanguage = "";
+  $scope.changeLocale = function(nativeLanguage) {
+    $scope.nativeLanguage = nativeLanguage;
+    console.log($scope.nativeLanguage);
+  }
   $scope.changeLanguage = function(selectedLanguage) {
     $scope.selectedLanguage = selectedLanguage;
     console.log($scope.selectedLanguage);
@@ -48,8 +53,8 @@ angular.module('starter', ['ionic'])
   $scope.translateSpeak = function() {
     var apiKey = 'trnsl.1.1.20170115T001645Z.3796a73ae92b9523.06c54f46db24a65471f340dd23cc39e9d4ff6966';
     var str = "";
-    var substr1 = $scope.selectedLanguage.substring(0,2);
-    var substr2 = $scope.recordedLanguage.substring(0,2);
+    var substr1 = $scope.nativeLanguage.substring(0,2);
+    var substr2 = $scope.selectedLanguage.substring(0,2);
     var lang = substr1+'-'+substr2;
 
     // console.log($scope.selectedLanguage.substring(0,2));
@@ -86,8 +91,8 @@ angular.module('starter', ['ionic'])
   $scope.translateRecord = function() {
     var apiKey = 'trnsl.1.1.20170115T001645Z.3796a73ae92b9523.06c54f46db24a65471f340dd23cc39e9d4ff6966';
     var str = "";
-    var substr1 = $scope.selectedLanguage.substring(0,2);
-    var substr2 = $scope.recordedLanguage.substring(0,2);
+    var substr1 = $scope.recordedLanguage.substring(0,2);
+    var substr2 = $scope.nativeLanguage.substring(0,2);
     var lang = substr1+'-'+substr2;
 
     // var request = {
