@@ -54,27 +54,33 @@ angular.module('starter', ['ionic'])
 
     // console.log($scope.selectedLanguage.substring(0,2));
 
-    var request = {
-      method: 'POST',
-      url: 'https://translate.yandex.net/api/v1.5/tr.json/translate',
-      headers: {
-        'Content-Type': undefined
-      },
-      data: {
-        key: apiKey,
-        text: $scope.data.speechText,
-        lang: lang
-      }
-    };
+    // var request = {
+    //   method: 'POST',
+    //   url: 'https://translate.yandex.net/api/v1.5/tr.json/translate',
+    //   headers: {
+    //     'Content-Type': undefined
+    //   },
+    //   data: {
+    //     key: apiKey,
+    //     text: $scope.data.speechText,
+    //     lang: lang
+    //   }
+    // };
 
-    $http(request).then(function(success){
-      console.log(success);
-      str = JSON.stringify(success);
-      $scope.data.speechText = str['text'];
-    }, 
-    function(error){
-        console.log(error);
-      });
+    // $http(request).then(function(success){
+    //   console.log(success);
+    //   str = JSON.stringify(success);
+    //   $scope.data.speechText = str['text'];
+    // }, 
+    // function(error){
+    //     console.log(error);
+    //   });
+
+    $.getJSON('https://translate.yandex.net/api/v1.5/tr.json/translate?key='+apiKey+'&lang='+lang+'&text='+$scope.data.speechText, function(data) {
+      $scope.data.speechText = data.text;
+      $scope.$apply();
+    });
+
     };
 
   $scope.translateRecord = function() {
@@ -84,26 +90,31 @@ angular.module('starter', ['ionic'])
     var substr2 = $scope.recordedLanguage.substring(0,2);
     var lang = substr1+'-'+substr2;
 
-    var request = {
-      method: 'POST',
-      url: 'https://translate.yandex.net/api/v1.5/tr.json/translate',
-      headers: {
-        'Content-Type': undefined
-      },
-      data: {
-        key: apiKey,
-        text: $scope.textToTranslate,
-        lang: lang
-      }
-    };
+    // var request = {
+    //   method: 'POST',
+    //   url: 'https://translate.yandex.net/api/v1.5/tr.json/translate',
+    //   headers: {
+    //     'Content-Type': undefined
+    //   },
+    //   data: {
+    //     key: apiKey,
+    //     text: $scope.textToTranslate,
+    //     lang: lang
+    //   }
+    // };
 
-    $http(request).then(function(success){
-      console.log(success);
-      str = JSON.stringify(success);
-      $scope.textToTranslate = str['text'];
-    }, 
-    function(error){
-        console.log(error);
-      });
+    // $http(request).then(function(success){
+    //   console.log(success);
+    //   str = JSON.stringify(success);
+    //   $scope.textToTranslate = str['text'];
+    // }, 
+    // function(error){
+    //     console.log(error);
+    //   });
+    $.getJSON('https://translate.yandex.net/api/v1.5/tr.json/translate?key='+apiKey+'&lang='+lang+'&text='+$scope.textToTranslate, function(data) {
+      $scope.textToTranslate = data.text;
+      $scope.$apply();
+    });
+
     };
 });
